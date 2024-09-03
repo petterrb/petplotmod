@@ -4,7 +4,7 @@ import numpy as np
 
 class PlotModifiers:
     def __init__(self, xlabel=None, ylabel=None, title=None, secondary_title=None, xlim=None, ylim=None, grid=False, legend=False,
-                 title_align=None, format_origin=False, scale_x=None, scale_y=None, scientific_x=False, scientific_y=False):
+                 title_align=None, format_origin=False, scientific_x=False, scientific_y=False):
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.title = title
