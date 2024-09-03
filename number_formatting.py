@@ -72,15 +72,3 @@ def format_num_with_err(val, err, parenthesis_error=False, do_add_dollars=False)
         out_str = f"${out_str}$"
 
     return out_str
-
-
-
-def main():
-    v = 1254.12354
-    e = 0.160
-
-    print(format_num_with_err(v, e, parenthesis_error=True, do_add_dollars=True))
-    return 0
-
-if __name__ == '__main__':
-    main()

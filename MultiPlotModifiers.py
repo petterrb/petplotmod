@@ -105,35 +105,3 @@ class MultiPlotModifiers:
                     return False
 
         return True
-
-
-
-def main():
-    plt.rcParams.update({
-        "text.usetex": True,
-        "font.family": "Helvetica",
-        "font.size": 6,
-        'figure.autolayout': True
-    })
-
-    n_rows, n_cols = 5, 5
-    plot_modifiers = [[PlotModifiers(title="Primary", secondary_title="Secondary", xlim=[-1,5], ylim=[-1,5], xlabel="$x$")
-                       for _ in range(n_cols)] for _ in range(n_rows)]
-
-    mpm = MultiPlotModifiers(plot_modifiers, has_same_x_axes=True, has_same_y_axes=True,
-                             has_extra_titles=True, has_extra_secondary_titles=True)
-
-    fig, axes = plt.subplots(n_rows, n_cols)
-    for i in range(n_rows):
-        for j in range(n_cols):
-            axes[i][j].plot(np.linspace(-1,i), np.linspace(-1,j))
-
-    mpm.apply(axes)
-    plt.show()
-    print(mpm.n_rows, mpm.n_cols)
-
-    return 0
-
-if __name__ == '__main__':
-    main()
-

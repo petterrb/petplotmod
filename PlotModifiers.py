@@ -66,25 +66,3 @@ class PlotModifiers:
 
         if max(abs(values)) <= 1e-4 or max(abs(values)) >= 1e6:
             print("Warning: Scientific notation is omitted, axis values may be wrong.")
-
-def main():
-    backend = "Qt5Agg"
-    show_fig = True
-    use(backend)
-    plt.rcParams.update({
-        "text.usetex": True,
-        "font.family": "Helvetica",
-        "font.size": 18,
-        'figure.autolayout': True
-    })
-
-    x = np.linspace(-1, 1.1)*1e6
-    fig, ax = plt.subplots()
-    ax.plot(x, x)
-
-    pm = PlotModifiers(xlabel="$x$", ylabel="$x$", scientific_x=True)
-    pm.apply(ax)
-    plt.show()
-
-if __name__ == '__main__':
-    main()
