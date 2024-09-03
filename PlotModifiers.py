@@ -4,7 +4,7 @@ import numpy as np
 
 class PlotModifiers:
     def __init__(self, xlabel=None, ylabel=None, title=None, secondary_title=None, xlim=None, ylim=None, grid=False, legend=False,
-                 title_align=None, format_origin=False, scientific_x=False, scientific_y=False):
+                 title_align=None, format_origin=False, scale_x=None, scale_y=None, scientific_x=False, scientific_y=False):
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.title = title
@@ -15,6 +15,8 @@ class PlotModifiers:
         self.grid = grid
         self.legend = legend
         self.format_origin = format_origin
+        self.scale_x = scale_x
+        self.scale_y = scale_y
         self.scientific_x = scientific_x
         self.scientific_y = scientific_y
 
@@ -34,6 +36,11 @@ class PlotModifiers:
             ax.legend()
         if self.format_origin:
             self._format_tick_labels(ax)
+        if self.scale_x is not None:
+            ax.set_xscale(self.scale_x)
+        if self.scale_y is not None:
+            ax.set_yscale(self.scale_y)
+
         if self.scientific_x:
             ax.ticklabel_format(style='sci', axis='x', scilimits=(0, 0))
         if self.scientific_y:
