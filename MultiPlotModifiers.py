@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib import use
 import numpy as np
 
-from PlotModifiers import PlotModifiers
+from .PlotModifiers import PlotModifiers
 
 class MultiPlotModifiers:
     def __init__(self, plot_modifiers: list[list[PlotModifiers]], has_same_x_axes=False, has_same_y_axes=False,
