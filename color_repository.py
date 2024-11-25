@@ -21,10 +21,10 @@ COLOR_DICT_SECONDARY = {
 }
 
 def get_color_primary(col):
-    _get_color(col, COLOR_DICT_PRIMARY)
+    return _get_color(col, COLOR_DICT_PRIMARY)
 
 def get_color_secondary(col):
-    _get_color(col, COLOR_DICT_SECONDARY)
+    return _get_color(col, COLOR_DICT_SECONDARY)
 
 def _get_color(col, color_dict):
     if type(col) == str:
