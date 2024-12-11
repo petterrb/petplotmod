@@ -60,17 +60,19 @@ class PlotModifiers:
 
         values = ax.get_xticks()
         labels = [item.get_text() for item in ax.get_xticklabels()]
-        idx, = (np.where(values == 0))[0]
-        labels[idx] = formatted_origin_str
-        ax.set_xticks(values)
-        ax.set_xticklabels(labels)
+        if len(labels) > 0:
+            idx, = (np.where(values == 0))[0]
+            labels[idx] = formatted_origin_str
+            ax.set_xticks(values)
+            ax.set_xticklabels(labels)
 
         values = ax.get_yticks()
         labels = [item.get_text() for item in ax.get_yticklabels()]
-        idx, = (np.where(values == 0))[0]
-        labels[idx] = formatted_origin_str
-        ax.set_yticks(values)
-        ax.set_yticklabels(labels)
+        if len(labels) > 0:
+            idx, = (np.where(values == 0))[0]
+            labels[idx] = formatted_origin_str
+            ax.set_yticks(values)
+            ax.set_yticklabels(labels)
 
         if max(abs(values)) <= 1e-4 or max(abs(values)) >= 1e6:
             print("Warning: Scientific notation is omitted, axis values may be wrong.")
