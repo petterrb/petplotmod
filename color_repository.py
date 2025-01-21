@@ -1,3 +1,6 @@
+import colorcet as cc
+import numpy as np
+
 COLOR_DICT_PRIMARY = {
     "blue": "#004488",      # dark blue
     "yellow": "#997700",    # dark yellow
@@ -35,3 +38,29 @@ def _get_color(col, color_dict):
             return color_dict[keys[col]]
         else:
             return color_dict["error"]
+
+def _hex_to_rgb(hex_str):
+    return [int(hex_str[i:i + 2], 16) for i in range(1, 6, 2)]
+
+def _rgb_to_hex(rgb_list):
+    return "#" + "".join([format(int(round(val * 255)), "02x") for val in rgb_list])
+
+def interpolate_colors(col1, col2, w):
+    if not (0 <= w and w <= 1):
+        raise ValueError("w must be between 0 and 1")
+
+    c1_rgb = np.array(_hex_to_rgb(col1)) / 255
+    c2_rgb = np.array(_hex_to_rgb(col2)) / 255
+    return _rgb_to_hex(c1_rgb * w + c2_rgb * (1 - w))
+
+def get_color_gradient(col1, col2, n):
+    """
+    Given two hex colors, returns a color gradient
+    with n colors.
+    """
+    if not n > 2:
+        raise ValueError("n must be larger than 2 to create a gradient")
+
+    weights = np.linspace(0, 1, n)
+    return [interpolate_colors(col1, col2, weight) for weight in weights]
+
