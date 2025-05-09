@@ -5,7 +5,7 @@ import numpy as np
 class PlotModifiers:
     def __init__(self, xlabel=None, ylabel=None, title=None, secondary_title=None, xlim=None, ylim=None, grid=False,
                  legend=False,title_align=None, format_origin=False, scale_x=None, scale_y=None, scientific_x=False,
-                 scientific_y=False):
+                 scientific_y=False, extra_ticks=True):
         self.xlabel = xlabel
         self.ylabel = ylabel
         self.title = title
@@ -20,6 +20,7 @@ class PlotModifiers:
         self.scale_y = scale_y
         self.scientific_x = scientific_x
         self.scientific_y = scientific_y
+        self.extra_ticks = extra_ticks
 
     def apply(self, ax: plt.Axes):
         ax.set_xlabel(self.xlabel)
@@ -46,6 +47,9 @@ class PlotModifiers:
             ax.ticklabel_format(style='sci', axis='x', scilimits=(0, 0))
         if self.scientific_y:
             ax.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+        if self.extra_ticks:
+            ax.tick_params(top=True, right=True)
+            ax.tick_params(labeltop=False, labelright=False)
 
     def _add_secondary_title(self, ax):
         ax2 = ax.twinx()
