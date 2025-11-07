@@ -1,7 +1,7 @@
 from tabulate import tabulate
 
 class LatexTable:
-    def __init__(self, table: list[list], header: list = None, first_col: list = None):
+    def __init__(self, table: list[list], header: list = None, first_col: list = None, units: list = None):
         """
         @param table: The table content, a 2D list.
         @param header: The table header.
@@ -10,6 +10,7 @@ class LatexTable:
         self.table = table
         self.header = header
         self.first_col = first_col
+        self.units = units
         self._validate()
 
     def print(self):
@@ -25,14 +26,18 @@ class LatexTable:
         """
         out_table = self.generate_out_table()
         if add_dollars:
-            out_table = [[f"${col}$" for col in row] for row in out_table]
+            out_table = [[f"${col}$" if self.units is None or (self.units is not None and row_idx != 1) else col
+                          for col in row] for row_idx, row in enumerate(out_table)]
 
-        print(" \\\ \n".join(" & ".join(row) for row in out_table))
+        print(" \\\ \n\n".join(" & ".join(row) for row in out_table))
 
     def generate_out_table(self):
         out_table = list()
         if self.header is not None:
             out_table.append(self.header)
+        if self.units is not None:
+            out_table.append(self.units)
+
         for idx, row in enumerate(self.table):
             if self.first_col is not None:
                 out_table.append(self.first_col[idx] + row)
