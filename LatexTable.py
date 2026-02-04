@@ -1,5 +1,6 @@
 from tabulate import tabulate
 
+
 class LatexTable:
     def __init__(self, table: list[list], header: list = None, first_col: list = None):
         """
@@ -26,6 +27,9 @@ class LatexTable:
         out_table = self.generate_out_table()
         if add_dollars:
             out_table = [[f"${col}$" for col in row] for row in out_table]
+        else:
+            out_table = [[str(col) for col in row] for row in out_table]
+
 
         print(" \\\ \n".join(" & ".join(row) for row in out_table))
 
@@ -35,11 +39,20 @@ class LatexTable:
             out_table.append(self.header)
         for idx, row in enumerate(self.table):
             if self.first_col is not None:
-                out_table.append(self.first_col[idx] + row)
+                row.insert(0, self.first_col[idx])
+                out_table.append(row)
             else:
                 out_table.append(row)
 
         return out_table
+
+    def round(self, decimal_places: int = 0):
+        for row_idx, col in enumerate(self.table):
+            for col_idx, value in enumerate(col):
+                try:
+                    self.table[row_idx][col_idx] = round(value, decimal_places)
+                except:
+                    pass
 
     def _validate(self) -> None:
         if self.first_col is None and self.header is None:
@@ -47,6 +60,6 @@ class LatexTable:
         elif self.first_col is None and (len(self.table[0]) != len(self.header)):
             raise ValueError(f"Table is invalid. Header has {len(self.header)} columns and table has"
                              f" {len(self.table[0])}.")
-        elif self.first_col is not None and len(self.table[0]) != (len(self.header) + 1):
+        elif self.first_col is not None and len(self.table[0]) + 1 != (len(self.header)):
             raise ValueError(f"Table is invalid. Header has {len(self.header)} columns and table has"
-                             f" {len(self.table[0])+1}, including the extra column.")
+                             f" {len(self.table[0]) + 1}, including the extra column.")
