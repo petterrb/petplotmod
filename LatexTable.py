@@ -39,8 +39,7 @@ class LatexTable:
             out_table.append(self.header)
         for idx, row in enumerate(self.table):
             if self.first_col is not None:
-                row.insert(0, self.first_col[idx])
-                out_table.append(row)
+                out_table.append([self.first_col[idx]] + row)
             else:
                 out_table.append(row)
 
