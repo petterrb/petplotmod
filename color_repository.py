@@ -7,6 +7,9 @@ COLOR_DICT_PRIMARY = {
     "yellow": "#997700",    # dark yellow
     "green": "#117733",     # dark green
     "red": "#994455",       # dark red
+    "teal": "#00aa88",      # dark teal
+    "orange": "#aa4400",    # dark orange
+    "purple": "#8800aa",    # dark purple
     "gray": "#696969",      # dark gray
     "black": "#000000",     # black
     "white": "#ffffff",     # white
@@ -17,6 +20,9 @@ COLOR_DICT_SECONDARY = {
     "yellow": "#eecc66",    # light yellow
     "green": "#66cc88",     # light green
     "red": "#ee99aa",       # light red
+    "teal": "#a4f8e7",      # light teal
+    "orange": "#ff9955",    # light orange
+    "purple": "#a76ee2",    # light purple
     "gray": "#d3d3d3",      # light gray
 }
 
