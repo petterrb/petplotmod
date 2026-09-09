@@ -3,27 +3,38 @@ import numpy as np
 ERROR_COLOR = "#ff00ff"
 
 COLOR_DICT_PRIMARY = {
-    "blue": "#004488",      # dark blue
-    "yellow": "#997700",    # dark yellow
-    "green": "#117733",     # dark green
-    "red": "#994455",       # dark red
-    "teal": "#00aa88",      # dark teal
-    "orange": "#aa4400",    # dark orange
-    "purple": "#8800aa",    # dark purple
-    "gray": "#696969",      # dark gray
-    "black": "#000000",     # black
-    "white": "#ffffff",     # white
+    "blue": "#004488",  # dark blue
+    "yellow": "#997700",  # dark yellow
+    "green": "#117733",  # dark green
+    "red": "#994455",  # dark red
+    "teal": "#00aa88",  # dark teal
+    "orange": "#aa4400",  # dark orange
+    "purple": "#8800aa",  # dark purple
+    "gray": "#696969",  # dark gray
+    "black": "#000000",  # black
+    "white": "#ffffff",  # white
 }
 
 COLOR_DICT_SECONDARY = {
-    "blue": "#6699cc",      # light blue
-    "yellow": "#eecc66",    # light yellow
-    "green": "#66cc88",     # light green
-    "red": "#ee99aa",       # light red
-    "teal": "#a4f8e7",      # light teal
-    "orange": "#ff9955",    # light orange
-    "purple": "#a76ee2",    # light purple
-    "gray": "#d3d3d3",      # light gray
+    "blue": "#6699cc",  # light blue
+    "yellow": "#eecc66",  # light yellow
+    "green": "#66cc88",  # light green
+    "red": "#ee99aa",  # light red
+    "teal": "#a4f8e7",  # light teal
+    "orange": "#ff9955",  # light orange
+    "purple": "#a76ee2",  # light purple
+    "gray": "#d3d3d3",  # light gray
+}
+
+COLOR_DICT_VERY_DARK = {
+    "blue": "#00254d",  # very dark blue
+    "yellow": "#614b00",  # very dark yellow
+    "green": "#09491e",  # very dark green
+    "red": "#71323e",  # very dark red
+    "teal": "#006b57",  # very dark teal
+    "orange": "#702d00",  # very dark orange
+    "purple": "#57006b",  # very dark purple
+    "gray": "#373737"  # very dark gray
 }
 
 COLOR_DICT_MUTED = {
@@ -39,14 +50,22 @@ COLOR_DICT_MUTED = {
     "gray": "#aaaaaa"
 }
 
+
 def get_color_primary(col):
     return _get_color(col, COLOR_DICT_PRIMARY)
+
 
 def get_color_secondary(col):
     return _get_color(col, COLOR_DICT_SECONDARY)
 
+
+def get_color_very_dark(col):
+    return _get_color(col, COLOR_DICT_VERY_DARK)
+
+
 def get_color_muted(col):
     return _get_color(col, COLOR_DICT_MUTED)
+
 
 def _get_color(col, color_dict):
     if type(col) == str:
@@ -64,11 +83,14 @@ def _get_color(col, color_dict):
         else:
             return ERROR_COLOR
 
+
 def _hex_to_rgb(hex_str):
     return [int(hex_str[i:i + 2], 16) for i in range(1, 6, 2)]
 
+
 def _rgb_to_hex(rgb_list):
     return "#" + "".join([format(int(round(val * 255)), "02x") for val in rgb_list])
+
 
 def interpolate_colors(col1, col2, w):
     if not (0 <= w and w <= 1):
@@ -77,6 +99,7 @@ def interpolate_colors(col1, col2, w):
     c1_rgb = np.array(_hex_to_rgb(col1)) / 255
     c2_rgb = np.array(_hex_to_rgb(col2)) / 255
     return _rgb_to_hex(c1_rgb * w + c2_rgb * (1 - w))
+
 
 def get_color_gradient(col1, col2, n):
     """
