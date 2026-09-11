@@ -37,6 +37,17 @@ COLOR_DICT_VERY_DARK = {
     "gray": "#373737"  # very dark gray
 }
 
+COLOR_DICT_VERY_LIGHT = {
+    "blue": "#d1e1f0",  # very light blue
+    "yellow": "#faf0d1",  # very light yellow
+    "green": "#c7ebd3",  # very light green
+    "red": "#fae1e6",  # very light red
+    "teal": "#d4fcf4",  # very light teal
+    "orange": "#ffd7bd",  # very light orange
+    "purple": "#e0ccf5",  # very light purple
+    "gray": "#ededed"  # very light gray
+}
+
 COLOR_DICT_MUTED = {
     "pink": "#cc6677",
     "darkblue": "#332288",
@@ -51,23 +62,27 @@ COLOR_DICT_MUTED = {
 }
 
 
-def get_color_primary(col):
+def get_color_primary(col: str | int):
     return _get_color(col, COLOR_DICT_PRIMARY)
 
 
-def get_color_secondary(col):
+def get_color_secondary(col: str | int):
     return _get_color(col, COLOR_DICT_SECONDARY)
 
 
-def get_color_very_dark(col):
+def get_color_very_dark(col: str | int):
     return _get_color(col, COLOR_DICT_VERY_DARK)
 
 
-def get_color_muted(col):
+def get_color_very_light(col: str | int):
+    return _get_color(col, COLOR_DICT_VERY_LIGHT)
+
+
+def get_color_muted(col: str | int):
     return _get_color(col, COLOR_DICT_MUTED)
 
 
-def _get_color(col, color_dict):
+def _get_color(col: str | int, color_dict: dict[str, str]):
     if type(col) == str:
         col = col.lower()
         if col == "grey":
@@ -84,11 +99,11 @@ def _get_color(col, color_dict):
             return ERROR_COLOR
 
 
-def _hex_to_rgb(hex_str):
+def _hex_to_rgb(hex_str: str):
     return [int(hex_str[i:i + 2], 16) for i in range(1, 6, 2)]
 
 
-def _rgb_to_hex(rgb_list):
+def _rgb_to_hex(rgb_list: list):
     return "#" + "".join([format(int(round(val * 255)), "02x") for val in rgb_list])
 
 
