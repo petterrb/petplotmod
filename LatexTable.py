@@ -13,12 +13,12 @@ class LatexTable:
         self.first_col = first_col
         self._validate()
 
-    def print(self):
+    def print(self, table_format: str = "plain"):
         out_table = self.generate_out_table()
         if self.header is not None:
-            print(tabulate(out_table[1:], headers=self.header, tablefmt="fancy_grid"))
+            print(tabulate(out_table[1:], headers=self.header, tablefmt=table_format))
         else:
-            print(tabulate(out_table, tablefmt="fancy_grid"))
+            print(tabulate(out_table, tablefmt=table_format))
 
     def print_latex(self, add_dollars=False) -> None:
         """
